@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+    .formBox {
+        margin-top: 90px;
+        padding: 50px;
+    }
+    .formBox h1 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        font-size: 48px;
+    }
+    .inputBox {
+        position: relative;
+        box-sizing: border-box;
+        margin-bottom: 50px;
+    }
+    .inputBox .inputText {
+        position: absolute;
+        font-size: 24px;
+        line-height: 50px;
+        transition: .5s;
+        opacity: .5;
+    }
+    .inputBox .input {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 24px;
+        border-bottom: 1px solid rgba(0,0,0,.5);
+    }
+    .focus .inputText {
+        transform: translateY(-30px);
+        font-size: 18px;
+        opacity: 1;
+        color: #00bcd4;
+    }
+    textarea {
+        height: 100px !important;
+    }
+    .button {
+        width: 100%;
+        height: 50px;
+        border: none;
+        outline: none;
+        background: #03A9F4;
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="formBox">
+        <form id="contactForm" action="https://formcarry.com/s/FF2xoh4UxRR" method="post">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Live Webinar</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="inputBox ">
+                        <div class="inputText">First Name</div>
+                        <input type="text" name="first_name" class="form-control input">
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="inputBox">
+                        <div class="inputText">Last Name</div>
+                        <input type="text" name="last_name" class="form-control input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="inputBox">
+                        <div class="inputText">Email</div>
+                        <input type="email" name="email" class="form-control input">
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="inputBox">
+                        <div class="inputText">Mobile</div>
+                        <input type="text" name="mobile" class="form-control input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="inputBox">
+                        <div class="inputText">Message</div>
+                        <textarea class="form-control input" name="message"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="submit" class="btn button" value="Send Message">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".input").focus(function() {
+            $(this).parent().addClass("focus");
+        });
+    });
+
+    // Get user's location
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        // Append latitude and longitude to the form as hidden inputs
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'latitude',
+            value: latitude
+        }).appendTo('#contactForm');
+
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'longitude',
+            value: longitude
+        }).appendTo('#contactForm');
+
+        // You can display the coordinates or do any other action here
+        console.log("Latitude: " + latitude +
+            " Longitude: " + longitude);
+    }
+
+    // Call the getLocation function when the page loads
+    getLocation();
+</script>
+
+</body>
+</html>
